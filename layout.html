@@ -1,0 +1,170 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+     <title>{% block title %}{{titre}}{% endblock %}</title>
+
+	<link rel="stylesheet" href="css/bootstrap.css" />
+	<link href="css/tuto.css" rel="stylesheet">	
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+    <script type="text/javascript" src="{{ asset('js/bootstrap.js') }}"></script>
+
+	
+
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+		  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+		<![endif]-->
+
+  
+  </head>
+  
+  <header class="row active well">
+        <div class="col-xs-12 ">
+			 <div class="row">
+				<div class="col-xs-4 ">
+					<p class="text-left ">
+
+				  </p>	  
+				</div>
+					
+				<div class="col-xs-4 col-xs-offset-1">
+					<p class="text-left ">
+
+					</p>	  
+				</div><a href="{{path('logout')}}"><button  class="btn btn-default pull-right">Déconnexion</button></a>
+			</div>
+					
+        </div>
+
+      </header>
+  
+  <body>
+    <div class="row  ">
+       
+		<div class="span2">  
+			 <nav class="col-xs-2 well">
+				<ul class="nav nav-pills nav-stacked ">  
+					<li class="active   "><a href="{{path('Grc_accueil')}}"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp; Accueil</a></li>
+					<li><a href="#">item1</a></li>					
+					<li><a href="{{path('LIST_IMP')}}">item1</a></li>  
+					<li><a href="#">item1 </a></li>   
+					<li><a href="#">item1</a></li><br><br>  
+							
+					<li class="active"><a href="#"><span class="glyphicon glyphicon-lock"></span>&nbsp;&nbsp;item1</a></li>	
+					<li>
+						<a href="#demo3"  class=" list-group-item-info strong" data-toggle="collapse"  >item1 <span style="float:right;" class="glyphicon glyphicon-chevron-down"></span></a>
+							<div class="collapse" id="demo3">
+								<a href="{{path('Add_IMP')}}" class="list-group-item"  >item1 </a>
+								<a href="{{path('EDIT_DELETE_IMP')}}" class="list-group-item" >item1</a>
+							</div>
+					</li>
+					<li >
+						<a href="#demo4"    class="list-group-item-info strong" data-toggle="collapse" >item1<span style="float:right;" class="glyphicon glyphicon-chevron-down"></span></a>
+							<div class="collapse" id="demo4">					
+								<a href="{{path('Add_USER')}}" class="list-group-item" >item1 </a>
+								<a href="{{path('EDIT_DELETE_USER')}}" class="list-group-item" >item1 </a>
+								<a href="#" class="list-group-item" d>item1</a>
+							</div>
+					</li>
+					<li >
+						<a href="#demo5"    class="list-group-item-info strong" data-toggle="collapse" >item1<span style="float:right;" class="glyphicon glyphicon-chevron-down"></span></a>
+							<div class="collapse" id="demo5">					
+								<a href="{{path('Add_USER')}}" class="list-group-item" >item1 </a>
+								<a href="{{path('EDIT_DELETE_USER')}}" class="list-group-item" >item1 </a>
+							</div>
+					</li>					
+
+				</ul>  
+			</nav>					
+		</div>  
+		
+
+	
+		
+<section class="  col-xs-10 well">
+	<div>
+	<p class="text-left "><h3> section</h3></p><br>
+
+</div>
+
+	
+   
+
+<script>
+
+ $('#myTab a').click(function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+})
+
+$(function() {
+$( "#grc_gtpbundle_imputation_dateOuverture" ).datepicker({
+altField: "#grc_gtpbundle_imputation_dateOuverture",
+closeText: 'Fermer',
+firstDay: 1 ,
+prevText: 'Précédent',
+nextText: 'Suivant',
+currentText: 'Aujourd\'hui',
+monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+monthNamesShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
+dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
+dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+weekHeader: 'Sem.',
+dateFormat: 'dd/mm/yy'
+});
+}).attr("readonly","readonly");
+$(function() {
+$( "#grc_gtpbundle_imputation_dateFermeture" ).datepicker({
+altField: "#grc_gtpbundle_imputation_dateFermeture",
+closeText: 'Fermer',
+firstDay: 1 ,
+prevText: 'Précédent',
+nextText: 'Suivant',
+currentText: 'Aujourd\'hui',
+monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+monthNamesShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
+dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
+dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+weekHeader: 'Sem.',
+dateFormat: 'dd/mm/yy'
+});
+}).attr("readonly","readonly")
+$(function() {
+$( "#grc_userbundle_user_dateEntreeEts" ).datepicker({
+altField: "#grc_userbundle_user_dateEntreeEts",
+closeText: 'Fermer',
+firstDay: 1 ,
+prevText: 'Précédent',
+nextText: 'Suivant',
+currentText: 'Aujourd\'hui',
+monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+monthNamesShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
+dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
+dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+weekHeader: 'Sem.',
+dateFormat: 'dd/mm/yy'
+});
+}).attr("readonly","readonly");
+
+
+
+</script>
+
+</script>
+
+
+   
+
+  </div>
+  </body>
+  
+</html>
