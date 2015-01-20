@@ -1,0 +1,27 @@
+body {
+  min-width: 970px;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-top:2px;
+}
+[class*="col-"], footer {
+  background-color: #222;
+  border: 2px solid black;
+  border-radius: 6px;
+  line-height: 20px;
+  text-align: left;
+}
+td { 
+width:2px; 
+} 
+
+
+th { 
+width:2px; 
+} 
+li
+{
+ background-color:  #222;
+}
