@@ -16,19 +16,14 @@ catch (Exception $e)
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZikOn-Accueil</title>
 
-    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css" />
     <link rel="stylesheet" type="text/css" href="css/local.css" />
 
     <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/shieldui-all.min.css" />
-    <link rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/light-bootstrap/all.min.css" />
-    <link id="gridcss" rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/dark-bootstrap/all.min.css" />
 
-    <script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
-    <script type="text/javascript" src="http://www.prepbootstrap.com/Content/js/gridData.js"></script>
+    
 </head>
 
 
@@ -95,7 +90,7 @@ catch(Exception $e)
 // Si tout va bien, on peut continuer
 
 // On récupère tout le contenu de la table jeux_video
-$reponse = $bdd->query('SELECT nom FROM genres');
+$reponse = $bdd->query('SELECT * FROM albums');
 ?>
 
 <div class="row">
@@ -105,10 +100,10 @@ $reponse = $bdd->query('SELECT nom FROM genres');
 while ($donnees = $reponse->fetch())
 {
 ?>
-  <div class="col-lg-4 col-sm-6 col-xs-12">
-    <strong> <?php echo $donnees['nom']; ?> </strong>
+  <div class="col-lg-3 col-sm-3 col-xs-12">
+    <strong> <?php echo $donnees['cover']; ?> </strong>
           <a href="#">
-               <img src="http://placehold.it/800x600" class="thumbnail img-responsive">
+             <img src="<?php echo $donnees['cover']; ?>" class="thumbnail img-responsive">
           </a>
   </div>
 
