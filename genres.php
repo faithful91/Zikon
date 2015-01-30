@@ -108,7 +108,7 @@ while ($donnees = $reponse->fetch())
   <div class="col-lg-4 col-sm-6 col-xs-12">
     <strong> <?php echo $donnees['nom']; ?> </strong>
           <a href="#">
-               <img src="http://placehold.it/800x600" class="thumbnail img-responsive">
+               <img src="./image/genres/<?php echo $donnees['nom']; ?>.jpg" width="300" height="300" class="thumbnail img-responsive">
           </a>
   </div>
 
