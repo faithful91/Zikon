@@ -93,7 +93,6 @@ catch (Exception $e)
                           </div>
                           <button type="submit" class="btn btn-default" id="validate" onClick="ajouteElement()">Sign In</button>
                       </form>
-
                 <?php
                   }
                 ?>
@@ -103,47 +102,52 @@ catch (Exception $e)
     
             <div class="row">
                 <div class="col-lg-12">
-  <h2 id='result'></h2>
- <?php
-try
-{
-    // On se connecte à MySQL
-    $bdd = new PDO('mysql:host=localhost;dbname=zikon;charset=utf8', 'root', 'root');
-}
-catch(Exception $e)
-{
-    // En cas d'erreur, on affiche un message et on arrête tout
-        die('Erreur : '.$e->getMessage());
-}
+					  <h2 id='result'></h2>
+						 <?php
+						try
+						{
+						    // On se connecte à MySQL
+						    $bdd = new PDO('mysql:host=localhost;dbname=zikon;charset=utf8', 'root', 'root');
+						}
+						catch(Exception $e)
+						{
+						    // En cas d'erreur, on affiche un message et on arrête tout
+						        die('Erreur : '.$e->getMessage());
+						}
 
-// Si tout va bien, on peut continuer
+						// Si tout va bien, on peut continuer
 
-// On récupère tout le contenu de la table jeux_video
-$reponse = $bdd->query('SELECT * FROM albums');
-?>
+						// On récupère tout le contenu de la table jeux_video
+						$reponse = $bdd->query('SELECT * FROM albums');
+						?>
 
-<div class="row">
+						<div class="row">
 
-<?php
-// On affiche chaque entrée une à une
-while ($donnees = $reponse->fetch())
-{
-?>
-  <div class="col-lg-3 col-sm-3 col-xs-12">
-    <strong> <?php echo $donnees['cover']; ?> </strong>
-          <a href="#">
-             <img src="<?php echo $donnees['cover']; ?>" class="thumbnail img-responsive">
-          </a>
-  </div>
+						<?php
+						// On affiche chaque entrée une à une
+						while ($donnees = $reponse->fetch())
+						{
+						?>
+						  <div class="col-xs-6 col-md-3" >
+						    
+						          <a href="#" >
+						          	<strong> <?php echo $donnees['nom']; ?> </strong>
+						             <img src="<?php echo $donnees['cover']; ?>" class="thumbnail img-responsive" width="170" height="170">		
+						          	<button class="btn" style="position:absolute;bottom:22px;">
+						          		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+					          		</button>
+						          </a>
+					          
+						  </div>
 
-   
-<?php
-}
+						   
+						<?php
+						}
 
-$reponse->closeCursor(); // Termine le traitement de la requête
+						$reponse->closeCursor(); // Termine le traitement de la requête
 
-?>
-</div>
+						?>
+					</div>
  
 
                 </div>
