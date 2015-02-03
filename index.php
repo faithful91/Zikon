@@ -58,7 +58,7 @@ catch (Exception $e)
                     <li><a href="#"><i class="fa fa-list-ul"></i> Artistes</a></li>
                     <li><a href="#"><i class="fa fa-list-ol"></i> Charts</a></li>
                     <li><a href="#"><i class="fa fa-table"></i> Agenda</a></li>
-                    <li><a href="#"><i class="fa fa-list"></i> Playlist</a></li>
+                    <li><a href="./playlist.php"><i class="fa fa-list"></i> Playlist</a></li>
                     
                     <!-- <img src="img/logo4.png" alt="ZikOn" style="width:225px;height:100px"> -->
                     
@@ -187,10 +187,7 @@ function validate(){
         type:       "GET",
         cache:      false,
         url:        "./gestionPlaylist.php",
-        data:       "id="+id,
-        success: function(){
-            alert("OOOOOOOOOOO");
-        }
+        data:       "id="+id
     }); 
 	}
 
