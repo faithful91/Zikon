@@ -106,7 +106,8 @@ catch (Exception $e)
     <tr>
       <th>Titre</th> 
       <th>Album</th>
-      <th>Artiste</th>  
+      <th>Artiste</th> 
+      <th>Genre</th> 
     </tr>
  <?php
 try
@@ -124,7 +125,7 @@ catch(Exception $e)
 $ids = join(',',$_SESSION['playlist']);  
 // On récupère tout le contenu de la table jeux_video
 
-$query = "SELECT * FROM titres where id IN(".implode(',',$_SESSION['playlist']).")";
+$query = "SELECT titres_albums.id, albums.nom as anom, titres.nom as tnom , path , genres.nom as gnom , artistes.nom as artnom FROM artistes,artistes_albums,titres_albums,albums,titres,genres WHERE titres_albums.titre = titres.id and titres_albums.album = albums.id and genres.id = titres.genre and artistes.id = artistes_albums.artiste and albums.id = artistes_albums.album and titres_albums.id IN(".implode(',',$_SESSION['playlist']).")";
 $reponse = $bdd->query($query );
 
 // On affiche chaque entrée une à une
@@ -133,9 +134,10 @@ while ($donnees = $reponse->fetch())
 {
 ?>
   <tr>
-         <td> <?php echo $donnees['nom']; ?> </td>
-          <td></td>
-          <td></td>
+         <td> <?php echo $donnees['tnom']; ?> </td>
+          <td> <?php echo $donnees['anom']; ?> </td>
+          <td> <?php echo $donnees['artnom']; ?> </td>
+          <td> <?php echo $donnees['gnom']; ?> </td>
   </tr>
 
    
