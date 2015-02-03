@@ -102,9 +102,11 @@ catch (Exception $e)
 
            
   <h2 id='result'></h2>
-   <table class="table table-hover">
+   <table class="table table-hover" style="color:#A2A2A2;background-color:#FFFFFF;">
     <tr>
-      <th>ID</th>
+      <th>Titre</th> 
+      <th>Album</th>
+      <th>Artiste</th>  
     </tr>
  <?php
 try
@@ -119,20 +121,21 @@ catch(Exception $e)
 }
 
 // Si tout va bien, on peut continuer
-
+$ids = join(',',$_SESSION['playlist']);  
 // On récupère tout le contenu de la table jeux_video
-$reponse = $bdd->query('SELECT nom FROM genres');
-?>
 
+$query = "SELECT * FROM titres where id IN(".implode(',',$_SESSION['playlist']).")";
+$reponse = $bdd->query($query );
 
-
-<?php
 // On affiche chaque entrée une à une
-foreach ($_SESSION['playlist'] as $key ) 
+
+while ($donnees = $reponse->fetch())
 {
 ?>
   <tr>
-         <td> <?php echo "$key"; ?> </td>
+         <td> <?php echo $donnees['nom']; ?> </td>
+          <td></td>
+          <td></td>
   </tr>
 
    
