@@ -14,7 +14,7 @@ catch (Exception $e)
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accueil</title>
+    <title>Genres</title>
 
     <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css" />
@@ -29,8 +29,6 @@ catch (Exception $e)
 
     <script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
     <script type="text/javascript" src="http://www.prepbootstrap.com/Content/js/gridData.js"></script>
-
-    
 </head>
 
 
@@ -53,7 +51,7 @@ catch (Exception $e)
                     <img src="img/logo4.png" alt="ZikOn" style="width:225px;height:100px">
                     
                     <li class="selected"><a href="index.php"><i class="fa fa-bullseye"></i> Accueil</a></li>
-                    <li><a href="./genres.php"><i class="fa fa-tasks"></i> Genres</a></li>
+                    <li><a href="#"><i class="fa fa-tasks"></i> Genres</a></li>
                     <li><a href="#"><i class="fa fa-globe"></i> News</a></li>                  
                     <li><a href="#"><i class="fa fa-list-ul"></i> Artistes</a></li>
                     <li><a href="#"><i class="fa fa-list-ol"></i> Charts</a></li>
@@ -63,8 +61,7 @@ catch (Exception $e)
                     <!-- <img src="img/logo4.png" alt="ZikOn" style="width:225px;height:100px"> -->
                     
                 </ul>
-
-                 <?php 
+                <?php 
                 session_start ();
                 if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
                 ?>
@@ -93,72 +90,60 @@ catch (Exception $e)
                           </div>
                           <button type="submit" class="btn btn-default" id="validate" onClick="ajouteElement()">Sign In</button>
                       </form>
+
                 <?php
                   }
                 ?>
+                 
             </div>
         </nav>
 
-    
-            <div class="row">
-                <div class="col-lg-12">
-					  <h2 id='result'></h2>
-						 <?php
-						try
-						{
-						    // On se connecte à MySQL
-						    $bdd = new PDO('mysql:host=localhost;dbname=zikon;charset=utf8', 'root', 'root');
-						}
-						catch(Exception $e)
-						{
-						    // En cas d'erreur, on affiche un message et on arrête tout
-						        die('Erreur : '.$e->getMessage());
-						}
+     
 
-						// Si tout va bien, on peut continuer
+           
+  <h2 id='result'></h2>
+   <table class="table table-hover">
+    <tr>
+      <th>ID</th>
+    </tr>
+ <?php
+try
+{
+    // On se connecte à MySQL
+    $bdd = new PDO('mysql:host=localhost;dbname=zikon;charset=utf8', 'root', 'root');
+}
+catch(Exception $e)
+{
+    // En cas d'erreur, on affiche un message et on arrête tout
+        die('Erreur : '.$e->getMessage());
+}
 
-						// On récupère tout le contenu de la table jeux_video
-						$reponse = $bdd->query('SELECT * FROM titres_albums,albums,titres WHERE
-							 titres_albums.titre = titres.id and titres_albums.album = albums.id 
-							 order by titres.nom');
-						?>
+// Si tout va bien, on peut continuer
 
-						<div class="row">
-
-						<?php
-						// On affiche chaque entrée une à une
-						while ($donnees = $reponse->fetch())
-						{
-						?>
-						  <div class="col-xs-6 col-md-3" >
-						    
-						          <div  >
-						          	<strong> <?php echo $donnees['nom']; ?> </strong>
-						             <img src="<?php echo $donnees['cover']; ?>" class="thumbnail img-responsive" width="170" height="170">		
-						          	<button class="btn" style="position:absolute;bottom:22px;" onclick="ajouterDansPlaylist(<?php echo $donnees['id']; ?>)">
-						          		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-					          		</button>
-						          </div>
-					          
-						  </div>
-
-						   
-						<?php
-						}
-
-						$reponse->closeCursor(); // Termine le traitement de la requête
-
-						?>
-					</div>
- 
-
-                </div>
-            </div>
+// On récupère tout le contenu de la table jeux_video
+$reponse = $bdd->query('SELECT nom FROM genres');
+?>
 
 
 
+<?php
+// On affiche chaque entrée une à une
+foreach ($_SESSION['playlist'] as $key ) 
+{
+?>
+  <tr>
+          <?php echo "loo $key"; ?>
+  </tr>
 
-    </div>
+   
+<?php
+}
+
+$reponse->closeCursor(); // Termine le traitement de la requête
+
+?>
+</table>
+
     <!-- /#wrapper -->
     
     
@@ -174,44 +159,37 @@ function validate(){
   if (validateEmail(email)) {
     $("#result").text(email + " is valid :)");
     $("#result").css("color", "green");
+    return true;
   } else {
     $("#result").text(email + " is not valid :(");
     $("#result").css("color", "red");
   }
   return false;
 }
+//$("form").bind("submit", validate);
+</script>
+    
+    
+  
 
-	function ajouterDansPlaylist(id){
-		// Détection du support
-		$.ajax({
-        type:       "POST",
-        cache:      false,
-        url:        "./gestionPlaylist.php",
-        data:       "type=ajouter&id="+id,
-        success: function(){
-            
-        }
-    }); 
-	}
+<script type="text/javascript">
+  function ajouteElement() 
+  {  
+    var email = $("#email").val();
 
-	function ajouteElement() 
-	{  
-		var email = $("#email").val();
-
-		var mon_div = null;
-		var nouveauDiv = null;
-		  // crée un nouvel élément div
-		  // et lui donne un peu de contenu
-		  nouveauDiv = document.createElement("div");
-		  nouveauDiv.innerHTML = email;
-		    nouveauDiv.style.color="black";
-		  // ajoute l'élément qui vient d'être créé et son contenu au DOM
-		  mon_div = document.getElementById("org_div1");
-		  if (validateEmail(email))
-		    {mon_div.parentNode.insertBefore(nouveauDiv,mon_div);}
-	}
-    </script>
-
+    var mon_div = null;
+    var nouveauDiv = null;
+    // crée un nouvel élément div
+    // et lui donne un peu de contenu
+    nouveauDiv = document.createElement("div");
+    nouveauDiv.innerHTML = email;
+      nouveauDiv.style.color="black";
+    // ajoute l'élément qui vient d'être créé et son contenu au DOM
+    mon_div = document.getElementById("org_div1");
+    if (validateEmail(email))
+      {mon_div.parentNode.insertBefore(nouveauDiv,mon_div);}
+  }
+</script>
 
 
 
