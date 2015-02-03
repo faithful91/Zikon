@@ -32,7 +32,7 @@ $req->execute(array($_POST['login'],$_POST['pwd']));
       $_SESSION['login'] = $_POST['login'];
       $_SESSION['pwd'] = $_POST['pwd'];
       $_SESSION['nom'] = $donnees['nom'];
-      $_SESSION['playlist'] =  array();
+      $_SESSION['playlist']= [];
       // on redirige notre visiteur vers une page de notre section membre
       header ('location: /Zikon/index.php');
 }

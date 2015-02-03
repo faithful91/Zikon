@@ -132,7 +132,7 @@ foreach ($_SESSION['playlist'] as $key )
 {
 ?>
   <tr>
-          <?php echo "loo $key"; ?>
+         <td> <?php echo "$key"; ?> </td>
   </tr>
 
    

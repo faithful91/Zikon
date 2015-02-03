@@ -184,12 +184,12 @@ function validate(){
 	function ajouterDansPlaylist(id){
 		// Détection du support
 		$.ajax({
-        type:       "POST",
+        type:       "GET",
         cache:      false,
         url:        "./gestionPlaylist.php",
-        data:       "type=ajouter&id="+id,
+        data:       "id="+id,
         success: function(){
-            
+            alert("OOOOOOOOOOO");
         }
     }); 
 	}
