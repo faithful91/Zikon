@@ -355,7 +355,7 @@
 		},
 		remove: function(index) {
 			var self = this;
-
+			
 			if(index === undefined) {
 				this._initPlaylist([]);
 				this._refresh(function() {
@@ -405,6 +405,17 @@
 							self.removing = false;
 						});
 					}
+					// Create the event
+					obj = {};
+					obj.id = index.toString();
+					
+ 					obj.detail = index.toString();
+					obj.idu = "fooo";
+					var event = new CustomEvent("my-remove", obj);
+
+					// Dispatch/Trigger/Fire the event
+					document.dispatchEvent(event);
+					
 					return true;
 				}
 			}

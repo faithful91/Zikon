@@ -118,7 +118,7 @@ catch (Exception $e)
 						// Si tout va bien, on peut continuer
 
 						// On récupère tout le contenu de la table jeux_video
-						$reponse = $bdd->query('SELECT * FROM titres_albums,albums,titres WHERE
+						$reponse = $bdd->query('SELECT titres.id,titres.nom,albums.cover FROM titres_albums,albums,titres WHERE
 							 titres_albums.titre = titres.id and titres_albums.album = albums.id 
 							 order by titres.nom');
 						?>
@@ -187,9 +187,19 @@ function validate(){
         type:       "GET",
         cache:      false,
         url:        "./gestionPlaylist.php",
-        data:       "id="+id
+        data:       "id="+id+"&action=ADD"
     }); 
 	}
+
+  function retirerDePlaylist(id){
+    // Détection du support
+    $.ajax({
+        type:       "GET",
+        cache:      false,
+        url:        "./gestionPlaylist.php",
+        data:       "id="+id+"&action=REMOVE"
+    }); 
+  }
 
 	function ajouteElement() 
 	{  
