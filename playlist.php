@@ -98,7 +98,7 @@ catch (Exception $e)
         {
             title:"<?php echo $row['tnom']; ?>",
             artist:"<?php echo $row['artnom']; ?>",
-            mp3:"http://www.jplayer.org/audio/mp3/TSP-05-Your_face.mp3",
+            mp3:"<?php echo $row['path']; ?>",
             poster: "<?php echo $row['cover']; ?>"
         }
       <?php 
