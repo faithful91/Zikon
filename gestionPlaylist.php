@@ -12,5 +12,4 @@
 		var_dump($_SESSION['playlist'] );
 	}
 	
-        
 ?>

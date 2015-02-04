@@ -34,13 +34,13 @@ $req->execute(array($_POST['login'],$_POST['pwd']));
       $_SESSION['nom'] = $donnees['nom'];
       $_SESSION['playlist']= [];
       // on redirige notre visiteur vers une page de notre section membre
-      header ('location: /Zikon/index.php');
+      header ("Location: $_SERVER[HTTP_REFERER]" );
 }
 if($compteur == 0){
   // Le visiteur n'a pas été reconnu comme étant membre de notre site. On utilise alors un petit javascript lui signalant ce fait
     echo '<body onLoad="alert(\'Membre non reconnu...\')">';
     // puis on le redirige vers la page d'accueil
-    echo '<meta http-equiv="refresh" content="0;URL=index.php">';
+    header ("Location: $_SERVER[HTTP_REFERER]" );
 }
 
 ?>
