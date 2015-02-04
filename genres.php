@@ -56,7 +56,7 @@ catch (Exception $e)
                     <li><a href="#"><i class="fa fa-list-ul"></i> Artistes</a></li>
                     <li><a href="#"><i class="fa fa-list-ol"></i> Charts</a></li>
                     <li><a href="#"><i class="fa fa-table"></i> Agenda</a></li>
-                    <li><a href="#"><i class="fa fa-list"></i> Playlist</a></li>
+                    <li><a href="./playlist.php"><i class="fa fa-list"></i> Playlist</a></li>
                     
                     <!-- <img src="img/logo4.png" alt="ZikOn" style="width:225px;height:100px"> -->
                     
@@ -100,7 +100,7 @@ catch (Exception $e)
 
      
 
-            <div class="row">
+            <div  class="row">
                 <div class="col-lg-12">
   <h2 id='result'></h2>
  <?php
@@ -118,10 +118,10 @@ catch(Exception $e)
 // Si tout va bien, on peut continuer
 
 // On récupère tout le contenu de la table jeux_video
-$reponse = $bdd->query('SELECT nom FROM genres');
+$reponse = $bdd->query('SELECT * FROM genres');
 ?>
 
-<div class="row">
+<div id="liste1" class="row">
 
 <?php
 // On affiche chaque entrée une à une
@@ -130,7 +130,7 @@ while ($donnees = $reponse->fetch())
 ?>
   <div class="col-lg-4 col-sm-6 col-xs-12">
     <strong> <?php echo $donnees['nom']; ?> </strong>
-          <a href="#">
+          <a href="#" onclick="return afficherGenre(<?php echo $donnees['id']; ?>);">
                <img src="./image/genres/<?php echo $donnees['nom']; ?>.jpg" width="300" height="300" class="thumbnail img-responsive">
           </a>
   </div>
@@ -143,59 +143,13 @@ $reponse->closeCursor(); // Termine le traitement de la requête
 
 ?>
 </div>
-  <!--
-  <div class="row">
-    <div class="col-lg-4 col-sm-6 col-xs-12">
-        <a href="#">
-             <img src="http://placehold.it/800x600" class="thumbnail img-responsive">
-        </a>
-    </div>
-     <div class="col-lg-4 col-sm-6 col-xs-12">
-        <a href="#">
-             <img src="http://placehold.it/800x600" class="thumbnail img-responsive">
-        </a>
-    </div>
-     <div class="col-lg-4 col-sm-6 col-xs-12">
-        <a href="#">
-             <img src="http://placehold.it/800x600" class="thumbnail img-responsive">
-        </a>
-    </div>
-     <div class="col-lg-4 col-sm-6 col-xs-12">
-        <a href="#">
-             <img src="http://placehold.it/800x600" class="thumbnail img-responsive">
-        </a>
-    </div>
-     <div class="col-lg-4 col-sm-6 col-xs-12">
-        <a href="#">
-             <img src="http://placehold.it/800x600" class="thumbnail img-responsive">
-        </a>
-    </div>
-     <div class="col-lg-4 col-sm-6 col-xs-12">
-        <a href="#">
-             <img src="http://placehold.it/800x600" class="thumbnail img-responsive">
-        </a>
-    </div>
-     <div class="col-lg-4 col-sm-6 col-xs-12">
-        <a href="#">
-             <img src="http://placehold.it/800x600" class="thumbnail img-responsive">
-        </a>
-    </div>
-     <div class="col-lg-4 col-sm-6 col-xs-12">
-        <a href="#">
-             <img src="http://placehold.it/800x600" class="thumbnail img-responsive">
-        </a>
-    </div>
-     <div class="col-lg-4 col-sm-6 col-xs-12">
-        <a href="#">
-             <img src="http://placehold.it/800x600" class="thumbnail img-responsive">
-        </a>
-    </div>
-  </div>
-  -->
-  
-
+              <div  class="row">
+                <div class="col-lg-12">
+                  <div id="liste2" class="row"></div>
                 </div>
-            </div>
+              </div>
+      </div>
+  </div>
 
 
 
@@ -208,6 +162,22 @@ $reponse->closeCursor(); // Termine le traitement de la requête
   function validateEmail(email) {   
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
+}
+
+function afficherGenre(genreId){
+
+  //$("#liste1").hide();
+  $.ajax({
+        type:       "POST",
+        cache:      false,
+        url:        "./gestionGenres.php",
+        data:       "genre="+genreId,
+        dataType : 'html', // On désire recevoir du HTML
+        success : function(code_html, statut){ // code_html contient le HTML renvoyé
+           $("#liste1").html(code_html);
+           //alert(code_html);
+       }
+    }); 
 }
 
 function validate(){
