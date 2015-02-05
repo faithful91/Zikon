@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 05, 2015 at 09:15 PM
+-- Generation Time: Feb 05, 2015 at 11:50 PM
 -- Server version: 5.6.22-log
 -- PHP Version: 5.5.12
 
@@ -152,7 +152,7 @@ CREATE TABLE IF NOT EXISTS `artistes_titres` (
   PRIMARY KEY (`id`),
   KEY `fk_artiste_idx` (`artiste`),
   KEY `fk_titre_idx` (`titre`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
 
 --
 -- Dumping data for table `artistes_titres`
@@ -170,7 +170,15 @@ INSERT INTO `artistes_titres` (`id`, `artiste`, `titre`, `principal`) VALUES
 (9, 2, 9, 'TRUE'),
 (10, 2, 10, 'TRUE'),
 (11, 2, 11, 'TRUE'),
-(12, 2, 12, 'TRUE');
+(12, 2, 12, 'TRUE'),
+(13, 8, 13, 'TRUE'),
+(14, 8, 18, 'TRUE'),
+(15, 8, 14, 'TRUE'),
+(16, 8, 15, 'TRUE'),
+(17, 8, 16, 'TRUE'),
+(18, 8, 17, 'TRUE'),
+(19, 8, 19, 'TRUE'),
+(20, 8, 20, 'TRUE');
 
 -- --------------------------------------------------------
 
@@ -230,30 +238,37 @@ INSERT INTO `genres` (`id`, `nom`) VALUES
 CREATE TABLE IF NOT EXISTS `titres` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(45) NOT NULL,
-  `album` varchar(45) DEFAULT NULL,
   `path` varchar(45) NOT NULL,
   `genre` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_genre_idx` (`genre`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
 
 --
 -- Dumping data for table `titres`
 --
 
-INSERT INTO `titres` (`id`, `nom`, `album`, `path`, `genre`) VALUES
-(1, 'Walk the Line', '1', './music/Iggy_Azalea/Walk the Line.mp3', 4),
-(2, 'Don''t Need Y''all', '1', './music/Iggy_Azalea/Don''t Need Y''all.mp3', 4),
-(3, 'New Bitch', '1', './music/Iggy_Azalea/New Bitch.mp3', 4),
-(4, 'Fancy', '1', './music/Iggy_Azalea/Fancy.mp3', 4),
-(5, 'Change Your Life', '1', './music/Iggy_Azalea/Change Your Life.mp3', 4),
-(6, 'Fuck Love', '1', './music/Iggy_Azalea/Fuck Love.mp3', 4),
-(7, 'Work', '1', './music/Iggy_Azalea/Work.mp3', 4),
-(8, 'Intro', '2', './music/Ariana_Grande/Intro.mp3', 1),
-(9, 'Problem', '2', './music/Ariana_Grande/Problem.mp3', 1),
-(10, 'One Last Time', '2', './music/Ariana_Grande/One Last Time.mp3', 1),
-(11, 'Why Try', '2', './music/Ariana_Grande/Why Try.mp3', 1),
-(12, 'Break Free', '2', './music/Ariana_Grande/Break Free.mp3', 1);
+INSERT INTO `titres` (`id`, `nom`, `path`, `genre`) VALUES
+(1, 'Walk the Line', './music/Iggy_Azalea/Walk the Line.mp3', 4),
+(2, 'Don''t Need Y''all', './music/Iggy_Azalea/Don''t Need Y''all.mp3', 4),
+(3, 'New Bitch', './music/Iggy_Azalea/New Bitch.mp3', 4),
+(4, 'Fancy', './music/Iggy_Azalea/Fancy.mp3', 4),
+(5, 'Change Your Life', './music/Iggy_Azalea/Change Your Life.mp3', 4),
+(6, 'Fuck Love', './music/Iggy_Azalea/Fuck Love.mp3', 4),
+(7, 'Work', './music/Iggy_Azalea/Work.mp3', 4),
+(8, 'Intro', './music/Ariana_Grande/Intro.mp3', 1),
+(9, 'Problem', './music/Ariana_Grande/Problem.mp3', 1),
+(10, 'One Last Time', './music/Ariana_Grande/One Last Time.mp3', 1),
+(11, 'Why Try', './music/Ariana_Grande/Why Try.mp3', 1),
+(12, 'Break Free', './music/Ariana_Grande/Break Free.mp3', 1),
+(13, 'Talk Dirty', './music/Jason_Derulo/Talk Dirty.mp3', 5),
+(14, 'Wiggle', './music/Jason_Derulo/Wiggle.mp3', 5),
+(15, 'Trumpets', './music/Jason_Derulo/Trumpets.mp3', 5),
+(16, 'Bubblegum', './music/Jason_Derulo/Bubblegum.mp3', 5),
+(17, 'Vertigo', './music/Jason_Derulo/Vertigo.mp3', 5),
+(18, 'Kama Sutra', './music/Jason_Derulo/Kama Sutra.mp3', 5),
+(19, 'Zipper', './music/Jason_Derulo/Zipper.mp3', 5),
+(20, 'The Other Side', './music/Jason_Derulo/The Other Side.mp3', 5);
 
 -- --------------------------------------------------------
 
@@ -268,7 +283,7 @@ CREATE TABLE IF NOT EXISTS `titres_albums` (
   PRIMARY KEY (`id`),
   KEY `fk_titre_idx` (`titre`),
   KEY `fk_album_idx` (`album`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
 
 --
 -- Dumping data for table `titres_albums`
@@ -286,7 +301,15 @@ INSERT INTO `titres_albums` (`id`, `titre`, `album`) VALUES
 (9, 9, 2),
 (10, 10, 2),
 (11, 11, 2),
-(12, 12, 2);
+(12, 12, 2),
+(13, 13, 8),
+(14, 14, 8),
+(15, 15, 8),
+(16, 16, 8),
+(17, 17, 8),
+(18, 18, 8),
+(19, 19, 8),
+(20, 20, 8);
 
 --
 -- Constraints for dumped tables

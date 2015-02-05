@@ -50,8 +50,8 @@ catch (Exception $e)
                 <ul id="active" class="nav navbar-nav side-nav">
                     <img src="img/logo4.png" alt="ZikOn" style="width:225px;height:100px">
                     
-                    <li class="selected"><a href="index.php"><i class="fa fa-bullseye"></i> Accueil</a></li>
-                    <li><a href="#"><i class="fa fa-tasks"></i> Genres</a></li>
+                    <li><a href="index.php"><i class="fa fa-bullseye"></i> Accueil</a></li>
+                    <li  class="selected"><a href="#"><i class="fa fa-tasks"></i> Genres</a></li>
                     <li><a href="#"><i class="fa fa-globe"></i> News</a></li>                  
                     <li><a href="#"><i class="fa fa-list-ul"></i> Artistes</a></li>
                     <li><a href="#"><i class="fa fa-list-ol"></i> Charts</a></li>
