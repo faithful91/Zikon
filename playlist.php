@@ -171,12 +171,25 @@ document.addEventListener("my-remove", function(e) {
                     <img src="img/logo4.png" alt="ZikOn" style="width:225px;height:100px">
                     
                     <li class="selected"><a href="index.php"><i class="fa fa-bullseye"></i> Accueil</a></li>
-                    <li><a href="#"><i class="fa fa-tasks"></i> Genres</a></li>
+                    <li><a href="./genres.php"><i class="fa fa-tasks"></i> Genres</a></li>
                     <li><a href="#"><i class="fa fa-globe"></i> News</a></li>                  
                     <li><a href="#"><i class="fa fa-list-ul"></i> Artistes</a></li>
                     <li><a href="#"><i class="fa fa-list-ol"></i> Charts</a></li>
                     <li><a href="#"><i class="fa fa-table"></i> Agenda</a></li>
-                    <li><a href="#"><i class="fa fa-list"></i> Playlist</a></li>
+                    <li>
+                      <a id ="playlist_link" href="#" ><i class="fa fa-list"></i> Playlist
+                        <span class="label label-warning">
+                          <?php  
+                            //session_start ();
+                            if(isset($_SESSION['playlist'])){
+                              echo count($_SESSION['playlist']);
+                            }else{
+                              echo "0";
+                            }
+                          ?>
+  
+                        </span>    
+                      </a></li>
                     
                     <!-- <img src="img/logo4.png" alt="ZikOn" style="width:225px;height:100px"> -->
                     
@@ -324,7 +337,12 @@ function validate(){
         type:       "GET",
         cache:      false,
         url:        "./gestionPlaylist.php",
-        data:       "id="+id+"&action=REMOVE"
+        data:       "id="+id+"&action=REMOVE",
+        dataType : 'html', // On désire recevoir du HTML
+        success : function(code_html, statut){ // code_html contient le HTML renvoyé
+           $("#playlist_link").html(code_html);
+           //alert(code_html);
+       }
     }); 
   }
 
