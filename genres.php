@@ -56,13 +56,28 @@ catch (Exception $e)
                     <li><a href="#"><i class="fa fa-list-ul"></i> Artistes</a></li>
                     <li><a href="#"><i class="fa fa-list-ol"></i> Charts</a></li>
                     <li><a href="#"><i class="fa fa-table"></i> Agenda</a></li>
-                    <li><a href="./playlist.php"><i class="fa fa-list"></i> Playlist</a></li>
-                    
+                    <li>
+                      <a id ="playlist_link" href="./playlist.php">
+                      <i class="fa fa-list"></i> Playlist 
+                        <span class="label label-warning">
+                          <?php  
+                            session_start ();
+                            if(isset($_SESSION['playlist'])){
+                              echo count($_SESSION['playlist']);
+                            }else{
+                              echo "0";
+                            }
+                          ?>
+  
+                        </span>
+                      </a>
+                        
+                    </li>
                     <!-- <img src="img/logo4.png" alt="ZikOn" style="width:225px;height:100px"> -->
                     
                 </ul>
                 <?php 
-                session_start ();
+                
                 if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
                 ?>
                   <form class="navbar-form navbar-right" role="search" action="deconnexion.php" method="post">
@@ -163,6 +178,44 @@ $reponse->closeCursor(); // Termine le traitement de la requête
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
 }
+
+function ajouterDansPlaylist(id){
+    // Détection du support
+    $.ajax({
+        type:       "GET",
+        cache:      false,
+        url:        "./gestionPlaylist.php",
+        data:       "id="+id+"&action=ADD",
+        dataType : 'html', // On désire recevoir du HTML
+        success : function(code_html, statut){ // code_html contient le HTML renvoyé
+           $("#playlist_link").html(code_html);
+           //alert(code_html);
+       }
+    });
+    $("#btn_"+id).attr("class","btn btn-danger");
+    $("#btn_"+id).attr("onclick","retirerDePlaylist("+id+")"); 
+    $("#span_"+id).attr("class","glyphicon glyphicon-minus");
+  }
+
+  function retirerDePlaylist(id){
+    // Détection du support
+    $.ajax({
+        type:       "GET",
+        cache:      false,
+        url:        "./gestionPlaylist.php",
+        data:       "id="+id+"&action=REMOVE_BY_ID",
+        dataType : 'html', // On désire recevoir du HTML
+        success : function(code_html, statut){ // code_html contient le HTML renvoyé
+           $("#playlist_link").html(code_html);
+           //alert(code_html);
+       }
+    }); 
+   $("#btn_"+id).attr("class","btn btn-success");
+   $("#btn_"+id).attr("onclick","ajouterDansPlaylist("+id+")"); 
+    $("#span_"+id).attr("class","glyphicon glyphicon-plus");
+  }
+
+
 
 function afficherGenre(genreId){
 

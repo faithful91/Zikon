@@ -134,8 +134,9 @@ catch (Exception $e)
 						// Si tout va bien, on peut continuer
 
 						// On récupère tout le contenu de la table jeux_video
-						$reponse = $bdd->query('SELECT titres.id,titres.nom,albums.cover FROM titres_albums,albums,titres WHERE
-							 titres_albums.titre = titres.id and titres_albums.album = albums.id 
+						$reponse = $bdd->query('SELECT titres.id,titres.nom,albums.cover,artistes.nom as anom FROM titres_albums,albums,titres,artistes_titres,artistes WHERE
+							 titres_albums.titre = titres.id and titres_albums.album = albums.id and artistes_titres.artiste = artistes.id and
+               artistes_titres.titre = titres.id 
 							 order by titres.nom');
 						?>
 
@@ -146,11 +147,13 @@ catch (Exception $e)
 						while ($donnees = $reponse->fetch())
 						{
 						?>
-						  <div class="col-xs-6 col-md-3" >
+						  <div class="col-xs-6 col-md-3" style="color:#000000" >
 						    
 						          <div  >
-						          	<strong> <?php echo $donnees['nom']; ?> </strong>
-						             <img src="<?php echo $donnees['cover']; ?>" class="thumbnail img-responsive" width="170" height="170">		
+						          	 <?php echo $donnees['nom']; ?> <br/>
+                        <small ><i>by <?php echo $donnees['anom']; ?></i></small>
+						             
+                         <img src="<?php echo $donnees['cover']; ?>" class="thumbnail img-responsive" width="170" height="170">		
 						          	<?php
                           if( in_array($donnees['id'], $_SESSION['playlist']) ){
                           ?>
