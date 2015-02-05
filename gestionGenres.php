@@ -22,7 +22,7 @@ $req->execute(array($_POST['genre']));
 
 
   $compteur = 0;
-echo "<div id='liste1' class='row'>";
+//echo "<div id='liste1' class='row'>";
 //	echo "<div class='col-lg-12'>";
 //		echo "<div class='row'>";
 
@@ -40,6 +40,6 @@ echo "<div id='liste1' class='row'>";
   }
 //		echo "</div>";
 //	echo "</div>";
-echo "</div>";
+//echo "</div>";
 
 ?>

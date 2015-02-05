@@ -135,8 +135,20 @@ catch (Exception $e)
 						          <div  >
 						          	<strong> <?php echo $donnees['nom']; ?> </strong>
 						             <img src="<?php echo $donnees['cover']; ?>" class="thumbnail img-responsive" width="170" height="170">		
-						          	<button class="btn" style="position:absolute;bottom:22px;" onclick="ajouterDansPlaylist(<?php echo $donnees['id']; ?>)">
-						          		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+						          	<?php
+                          if( in_array($donnees['id'], $_SESSION['playlist']) ){
+                          ?>
+                            <button id ="btn_<?php echo $donnees['id']; ?>" class="btn btn-danger" style="position:absolute;bottom:22px;" onclick="retirerDePlaylist(<?php echo $donnees['id']; ?>)"> 
+                              <span id ="span_<?php echo $donnees['id']; ?>" class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                            <?php
+                          }else{
+                            ?>
+                            <button id ="btn_<?php echo $donnees['id']; ?>" class="btn btn-success" style="position:absolute;bottom:22px;" onclick="ajouterDansPlaylist(<?php echo $donnees['id']; ?>)">
+                              <span id ="span_<?php echo $donnees['id']; ?>" class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        <?php
+                          }
+                        ?>
+                        	
 					          		</button>
 						          </div>
 					          
@@ -188,8 +200,11 @@ function validate(){
         cache:      false,
         url:        "./gestionPlaylist.php",
         data:       "id="+id+"&action=ADD"
-    }); 
-	}
+    });
+    $("#btn_"+id).attr("class","btn btn-danger");
+    $("#btn_"+id).attr("onclick","retirerDePlaylist("+id+")"); 
+    $("#span_"+id).attr("class","glyphicon glyphicon-minus");
+  }
 
   function retirerDePlaylist(id){
     // Détection du support
@@ -197,8 +212,11 @@ function validate(){
         type:       "GET",
         cache:      false,
         url:        "./gestionPlaylist.php",
-        data:       "id="+id+"&action=REMOVE"
+        data:       "id="+id+"&action=REMOVE_BY_ID"
     }); 
+   $("#btn_"+id).attr("class","btn btn-success");
+   $("#btn_"+id).attr("onclick","ajouterDansPlaylist("+id+")"); 
+    $("#span_"+id).attr("class","glyphicon glyphicon-plus");
   }
 
 	function ajouteElement() 
