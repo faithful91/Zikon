@@ -51,9 +51,9 @@ catch (Exception $e)
                     <img src="img/logo4.png" alt="ZikOn" style="width:225px;height:100px">
                     
                     <li><a href="index.php"><i class="fa fa-bullseye"></i> Accueil</a></li>
-                    <li  class="selected"><a href="#"><i class="fa fa-tasks"></i> Genres</a></li>
+                    <li class="selected"><a href="./genres.php"><i class="fa fa-tasks"></i> Genres</a></li>
                     <li><a href="#"><i class="fa fa-globe"></i> News</a></li>                  
-                    <li><a href="#"><i class="fa fa-list-ul"></i> Artistes</a></li>
+                    <li><a href="./artistes.php"><i class="fa fa-list-ul"></i> Artistes</a></li>
                     <li><a href="#"><i class="fa fa-list-ol"></i> Charts</a></li>
                     <li><a href="#"><i class="fa fa-table"></i> Agenda</a></li>
                     <li>
@@ -107,9 +107,8 @@ catch (Exception $e)
                           <div class="form-group">
                               <input type="password" class="form-control" name="pwd" placeholder="Password"/>
                           </div>
-                          <button type="submit" class="btn btn-default" id="validate" onClick="ajouteElement()">Sign In</button>
+                          <input type="submit" class="btn btn-default" value="se connecter"></input>
                       </form>
-
                 <?php
                   }
                 ?>
@@ -147,7 +146,7 @@ $reponse = $bdd->query('SELECT * FROM genres');
 while ($donnees = $reponse->fetch())
 {
 ?>
-  <div class="col-lg-4 col-sm-6 col-xs-12">
+  <div class="col-lg-4 col-sm-6 col-xs-12" style="color:#000000">
     <strong> <?php echo $donnees['nom']; ?> </strong>
           <a href="#" onclick="return afficherGenre(<?php echo $donnees['id']; ?>);">
                <img src="./image/genres/<?php echo $donnees['nom']; ?>.jpg" width="300" height="300" class="thumbnail img-responsive">
@@ -270,15 +269,18 @@ function validate(){
   $("#result").text("");
   var email = $("#email").val();
   if (validateEmail(email)) {
-    $("#result").text(email + " is valid :)");
-    $("#result").css("color", "green");
     return true;
   } else {
-    $("#result").text(email + " is not valid :(");
-    $("#result").css("color", "red");
+    $("#msg").html("<div class='alert alert-danger' role='alert'>"
+        +"<span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>"
+        +"<span class='sr-only'>Error:</span>"
+        +"&nbsp;Votre adresse n'est pas valide !"
+        +"</div>");
+    return false;
   }
-  return false;
+  
 }
+
 //$("form").bind("submit", validate);
 </script>
     

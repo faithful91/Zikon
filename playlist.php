@@ -174,7 +174,7 @@ document.addEventListener("my-remove", function(e) {
                     <li><a href="index.php"><i class="fa fa-bullseye"></i> Accueil</a></li>
                     <li><a href="./genres.php"><i class="fa fa-tasks"></i> Genres</a></li>
                     <li><a href="#"><i class="fa fa-globe"></i> News</a></li>                  
-                    <li><a href="#"><i class="fa fa-list-ul"></i> Artistes</a></li>
+                    <li><a href="./artistes.php"><i class="fa fa-list-ul"></i> Artistes</a></li>
                     <li><a href="#"><i class="fa fa-list-ol"></i> Charts</a></li>
                     <li><a href="#"><i class="fa fa-table"></i> Agenda</a></li>
                     <li class="selected">
