@@ -36,7 +36,8 @@ catch (Exception $e)
     <?php session_start();?>
     <script type="text/javascript">
     <?php
-
+      $compteur = 0;
+      if(isset($_SESSION['playlist']) ){
       try
       {
           // On se connecte à MySQL
@@ -56,7 +57,7 @@ catch (Exception $e)
       $reponse = $bdd->query($query );
       $rows = [];
       // On affiche chaque entrée une à une
-      $compteur = 0;
+      
       if( !empty($reponse) ){
       while ($donnees = $reponse->fetch())
       {
@@ -74,8 +75,8 @@ catch (Exception $e)
  
     //pdo_error("FETCH ERROR: ".$e->getMessage(), "Query:".$Query);
  
-}
-
+      }
+  }
     ?>
       $(document).ready(function(){
           var myPlaylist = new jPlayerPlaylist({

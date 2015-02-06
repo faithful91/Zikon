@@ -155,7 +155,7 @@ catch (Exception $e)
 						             
                          <img src="<?php echo $donnees['cover']; ?>" class="thumbnail img-responsive" width="170" height="170">		
 						          	<?php
-                          if( in_array($donnees['id'], $_SESSION['playlist']) ){
+                          if( isset($_SESSION['playlist']) && in_array($donnees['id'], $_SESSION['playlist']) ){
                           ?>
                             <button id ="btn_<?php echo $donnees['id']; ?>" class="btn btn-danger" style="position:absolute;bottom:22px;" onclick="retirerDePlaylist(<?php echo $donnees['id']; ?>)"> 
                               <span id ="span_<?php echo $donnees['id']; ?>" class="glyphicon glyphicon-minus" aria-hidden="true"></span>

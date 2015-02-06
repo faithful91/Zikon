@@ -33,7 +33,7 @@ session_start();
 					echo "".$donnees['nom']."<br/>";
 					echo "<small ><i>by ".$donnees['anom']."</i></small>" ;      
 					echo "<img src='".$donnees['cover']."' class='thumbnail img-responsive' width='170' height='170'>";		
-					if( in_array($donnees['id'], $_SESSION['playlist']) ){
+					if( isset($_SESSION['playlist']) && in_array($donnees['id'], $_SESSION['playlist']) ){
 						echo "<button id ='btn_".$donnees['id']."' class='btn btn-danger' style='position:absolute;bottom:22px;' onclick='retirerDePlaylist(".$donnees['id'].")'>";
 							echo "<span id ='span_".$donnees['id']."'  class='glyphicon glyphicon-minus' aria-hidden='true'></span>";
 					}else{
