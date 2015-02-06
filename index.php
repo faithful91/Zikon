@@ -112,7 +112,7 @@ catch (Exception $e)
                           <div class="form-group">
                               <input type="password" class="form-control" name="pwd" placeholder="Password"/>
                           </div>
-                          <button type="submit" class="btn btn-default" id="validate" onClick="ajouteElement()">Sign In</button>
+                          <input type="submit" class="btn btn-default" value="se connecter"></input>
                       </form>
                       
                 <?php
@@ -210,13 +210,16 @@ function validate(){
   $("#result").text("");
   var email = $("#email").val();
   if (validateEmail(email)) {
-    $("#result").text(email + " is valid :)");
-    $("#result").css("color", "green");
+    return true;
   } else {
-    $("#result").text(email + " is not valid :(");
-    $("#result").css("color", "red");
+    $("#msg").html("<div class='alert alert-danger' role='alert'>"
+        +"<span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>"
+        +"<span class='sr-only'>Error:</span>"
+        +"&nbsp;Votre adresse n'est pas valide !"
+        +"</div>");
+    return false;
   }
-  return false;
+  
 }
 
 	function ajouterDansPlaylist(id){

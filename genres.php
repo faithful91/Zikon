@@ -73,6 +73,10 @@ catch (Exception $e)
                       </a>
                         
                     </li>
+                    <li>
+                      <div id="msg" class="navbar-form navbar-right"></div>
+
+                    </li>
                     <!-- <img src="img/logo4.png" alt="ZikOn" style="width:225px;height:100px"> -->
                     
                 </ul>
