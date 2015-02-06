@@ -178,41 +178,70 @@ $reponse->closeCursor(); // Termine le traitement de la requête
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
 }
-
-function ajouterDansPlaylist(id){
+  function ajouterDansPlaylist(id){
     // Détection du support
-    $.ajax({
-        type:       "GET",
-        cache:      false,
-        url:        "./gestionPlaylist.php",
-        data:       "id="+id+"&action=ADD",
-        dataType : 'html', // On désire recevoir du HTML
-        success : function(code_html, statut){ // code_html contient le HTML renvoyé
-           $("#playlist_link").html(code_html);
-           //alert(code_html);
-       }
-    });
-    $("#btn_"+id).attr("class","btn btn-danger");
-    $("#btn_"+id).attr("onclick","retirerDePlaylist("+id+")"); 
-    $("#span_"+id).attr("class","glyphicon glyphicon-minus");
+    <?php 
+      if(isset($_SESSION['playlist']) ){
+        ?>
+        $.ajax({
+          type:       "GET",
+          cache:      false,
+          url:        "./gestionPlaylist.php",
+          data:       "id="+id+"&action=ADD",
+          dataType : 'html', // On désire recevoir du HTML
+          success : function(code_html, statut){ // code_html contient le HTML renvoyé
+             $("#playlist_link").html(code_html);
+             //alert(code_html);
+         }
+      });
+        $("#btn_"+id).attr("class","btn btn-danger");
+        $("#btn_"+id).attr("onclick","retirerDePlaylist("+id+")"); 
+        $("#span_"+id).attr("class","glyphicon glyphicon-minus");
+      <?php
+      }else{
+        ?>
+      $("#msg").html("<div class='alert alert-danger' role='alert'>"
+        +"<span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>"
+        +"<span class='sr-only'>Error:</span>"
+        +"&nbsp;Vous devez vous connecter !"
+        +"</div>");
+
+      <?php
+      }
+    ?>
+    
   }
 
   function retirerDePlaylist(id){
-    // Détection du support
-    $.ajax({
-        type:       "GET",
-        cache:      false,
-        url:        "./gestionPlaylist.php",
-        data:       "id="+id+"&action=REMOVE_BY_ID",
-        dataType : 'html', // On désire recevoir du HTML
-        success : function(code_html, statut){ // code_html contient le HTML renvoyé
-           $("#playlist_link").html(code_html);
-           //alert(code_html);
-       }
-    }); 
-   $("#btn_"+id).attr("class","btn btn-success");
-   $("#btn_"+id).attr("onclick","ajouterDansPlaylist("+id+")"); 
-    $("#span_"+id).attr("class","glyphicon glyphicon-plus");
+    <?php 
+      if(isset($_SESSION['playlist']) ){
+        ?>
+        $.ajax({
+            type:       "GET",
+            cache:      false,
+            url:        "./gestionPlaylist.php",
+            data:       "id="+id+"&action=REMOVE_BY_ID",
+            dataType : 'html', // On désire recevoir du HTML
+            success : function(code_html, statut){ // code_html contient le HTML renvoyé
+               $("#playlist_link").html(code_html);
+               //alert(code_html);
+           }
+        }); 
+        $("#btn_"+id).attr("class","btn btn-success");
+        $("#btn_"+id).attr("onclick","ajouterDansPlaylist("+id+")"); 
+        $("#span_"+id).attr("class","glyphicon glyphicon-plus");
+
+     <?php
+      }else{
+        ?>
+      $("#msg").html("<div class='alert alert-danger' role='alert'>"
+        +"<span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>"
+        +"<span class='sr-only'>Error:</span>"
+        +"&nbsp;Vous devez vous connecter !"
+        +"</div>");
+      <?php
+      }
+    ?>
   }
 
 
