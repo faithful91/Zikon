@@ -9,5 +9,5 @@ session_unset ();
 session_destroy ();
 
 // On redirige le visiteur vers la page d'accueil
-header ("Location: $_SERVER[HTTP_REFERER]" );
+header ("Location: ./index.php" );
 ?>

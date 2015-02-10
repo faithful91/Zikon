@@ -131,7 +131,7 @@ catch (Exception $e)
     
             <div class="row">
 
-                <div class="col-lg-12">
+                <div class="col-lg-9 col-xs-offset-1">
 					  <h2 id='result'></h2>
 						 <?php
              if(isset($_SESSION['login'])){
