@@ -3,8 +3,8 @@
 
 <?php
 function connectMaBase(){
-    $base = mysql_connect ('localhost', 'root', 'root');  
-    mysql_select_db ('zikon', $base) ;
+    $base = mysqli_connect ('localhost', 'root', 'root','zikon');  
+    
 }
 
 ?>
@@ -36,11 +36,10 @@ else
                 connectMaBase();
 
                               $nom = mysql_real_escape_string($_POST['nom']);
-                                $prenom = mysql_real_escape_string($_POST['prenom']);
                                 $email=mysql_real_escape_string($_POST['email']);
                                 $pass = mysql_real_escape_string($_POST['pass']);
                    
-                 $sql=('INSERT INTO comptesutilisateurs(nom, prenom, login, password) VALUES ("'.$nom.'","'.$prenom.'", "'.$email.'","'.$pass.'");');
+                 $sql=('INSERT INTO comptesutilisateurs(nom, login, password) VALUES ("'.$nom.'", "'.$email.'","'.$pass.'");');
 
                               mysql_query ($sql) or die ('Erreur SQL !'.$sql.'<br />'.mysql_error()); 
                           }
@@ -74,11 +73,6 @@ else
             <form class="inscri" action="login2.php" method="post">
                 <input type="text" name="login" class="name" placeholder="Email...">
                 <input type="text" name="pass" class="email" placeholder="Mot de passe...">
-                
-
-
-
-               
                 <button type="submit">Connextion</button>
             </form>
         </div>
@@ -99,7 +93,7 @@ else
             
             <form class="inscri" action="ident.php" method="post">
                 <input type="text" name="nom" class="name" placeholder="Nom...">
-                <input type="text" name="prenom" class="email" placeholder="Prenom...">
+                
                 <input type="text" name="email" class="email" placeholder="E-Mail...">
                 <input type="password" name="pass" class="email" placeholder="Password...">
                 <input type="password" name="cpassemail" class="email" placeholder="Confirme Password...">
@@ -131,8 +125,8 @@ $(document).ready(function(){
         {             document.getElementById('iden').style.display = 'none';
                       document.getElementById('inscription').style.display = 'block';
                         i=false;}
-    else {           document.getElementById('page-container').style.display = 'block';
-                     document.getElementById('iden').style.display = 'none';
+    else {           document.getElementById('iden').style.display = 'block';
+                     document.getElementById('inscription').style.display = 'none';
 
                         i=true}
     
