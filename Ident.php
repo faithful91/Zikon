@@ -131,8 +131,8 @@ $(document).ready(function(){
         {             document.getElementById('iden').style.display = 'none';
                       document.getElementById('inscription').style.display = 'block';
                         i=false;}
-    else {           document.getElementById('page-container').style.display = 'block';
-                     document.getElementById('iden').style.display = 'none';
+    else {           document.getElementById('iden').style.display = 'block';
+                     document.getElementById('inscription').style.display = 'none';
 
                         i=true}
     
