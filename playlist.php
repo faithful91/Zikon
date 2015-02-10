@@ -175,7 +175,7 @@ document.addEventListener("my-remove", function(e) {
                     <li><a href="./genres.php"><i class="fa fa-tasks"></i> Genres</a></li>
                     <li><a href="#"><i class="fa fa-globe"></i> News</a></li>                  
                     <li><a href="./artistes.php"><i class="fa fa-list-ul"></i> Artistes</a></li>
-                    <li><a href="#"><i class="fa fa-list-ol"></i> Charts</a></li>
+                    <li><a href="./historique.php"><i class="fa fa-list-ol"></i> Historique</a></li>
                     <li><a href="#"><i class="fa fa-table"></i> Agenda</a></li>
                     <li class="selected">
                       <a id ="playlist_link" href="#" ><i class="fa fa-list"></i> Playlist
@@ -228,7 +228,13 @@ document.addEventListener("my-remove", function(e) {
                 <?php
                   }
                 ?>
-                 
+                 <form class="navbar-form navbar-right navbar-input-group" role="search" action="search.php" method="post" >
+                         <div class="form-group">
+                            <input type="text" class="form-control" name="text" style="color:#000000" placeholder="Search for...">
+                          </div>
+                          <input type="submit" class="btn btn-default" value="Go!"></input>
+
+                      </form>
             </div>
         </nav>
 <div >

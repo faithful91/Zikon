@@ -14,7 +14,7 @@ catch (Exception $e)
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Genres</title>
+    <title>Historique</title>
 
     <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css" />
@@ -29,6 +29,8 @@ catch (Exception $e)
 
     <script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
     <script type="text/javascript" src="http://www.prepbootstrap.com/Content/js/gridData.js"></script>
+
+    
 </head>
 
 
@@ -50,11 +52,11 @@ catch (Exception $e)
                 <ul id="active" class="nav navbar-nav side-nav">
                     <img src="img/logo4.png" alt="ZikOn" style="width:225px;height:100px">
                     
-                    <li><a href="index.php"><i class="fa fa-bullseye"></i> Accueil</a></li>
-                    <li class="selected"><a href="./genres.php"><i class="fa fa-tasks"></i> Genres</a></li>
+                    <li ><a href="index.php"><i class="fa fa-bullseye"></i> Accueil</a></li>
+                    <li><a href="./genres.php"><i class="fa fa-tasks"></i> Genres</a></li>
                     <li><a href="#"><i class="fa fa-globe"></i> News</a></li>                  
                     <li><a href="./artistes.php"><i class="fa fa-list-ul"></i> Artistes</a></li>
-                    <li><a href="./historique.php"><i class="fa fa-list-ol"></i> Historique</a></li>
+                    <li class="selected"><a href="./historique.php"><i class="fa fa-list-ol"></i>Historique</a></li>
                     <li><a href="#"><i class="fa fa-table"></i> Agenda</a></li>
                     <li>
                       <a id ="playlist_link" href="./playlist.php">
@@ -77,10 +79,12 @@ catch (Exception $e)
                       <div id="msg" class="navbar-form navbar-right"></div>
 
                     </li>
+                    
                     <!-- <img src="img/logo4.png" alt="ZikOn" style="width:225px;height:100px"> -->
                     
                 </ul>
-                <?php 
+
+                 <?php 
                 
                 if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
                 ?>
@@ -97,6 +101,7 @@ catch (Exception $e)
                     </h5>
                     
                   </div>
+                  
                 <?php
                   }else{
                 ?>
@@ -109,70 +114,78 @@ catch (Exception $e)
                           </div>
                           <input type="submit" class="btn btn-default" value="se connecter"></input>
                       </form>
+                      
                 <?php
                   }
                 ?>
                 <form class="navbar-form navbar-right navbar-input-group" role="search" action="search.php" method="post" >
-                 <div class="form-group">
-                    <input type="text" class="form-control" name="text" style="color:#000000" placeholder="Search for...">
-                  </div>
-                  <input type="submit" class="btn btn-default" value="Go!"></input>
+                         <div class="form-group">
+                            <input type="text" class="form-control" name="text" style="color:#000000" placeholder="Search for...">
+                          </div>
+                          <input type="submit" class="btn btn-default" value="Go!"></input>
 
-              </form>
+                      </form>
+            </div>
         </nav>
 
-     
+    
+            <div class="row">
 
-            <div  class="row">
                 <div class="col-lg-12">
-  <h2 id='result'></h2>
- <?php
-try
-{
-    // On se connecte à MySQL
-    $bdd = new PDO('mysql:host=localhost;dbname=zikon;charset=utf8', 'root', 'root');
-}
-catch(Exception $e)
-{
-    // En cas d'erreur, on affiche un message et on arrête tout
-        die('Erreur : '.$e->getMessage());
-}
+					  <h2 id='result'></h2>
+						 <?php
+             if(isset($_SESSION['login'])){
+						try
+						{
+						    // On se connecte à MySQL
+						    $bdd = new PDO('mysql:host=localhost;dbname=zikon;charset=utf8', 'root', 'root');
+						}
+						catch(Exception $e)
+						{
+						    // En cas d'erreur, on affiche un message et on arrête tout
+						        die('Erreur : '.$e->getMessage());
+						}
 
-// Si tout va bien, on peut continuer
+						// Si tout va bien, on peut continuer
+            
+						// On récupère tout le contenu de la table jeux_video
+						$reponse = $bdd->prepare('SELECT titres.id,titres.nom,albums.cover,artistes.nom as anom FROM titres_albums,albums,titres,artistes_titres,artistes,historiques, comptesutilisateurs WHERE
+							 titres_albums.titre = titres.id and titres_albums.album = albums.id and artistes_titres.artiste = artistes.id and
+               artistes_titres.titre = titres.id and historiques.utilisateur = comptesutilisateurs.login and historiques.titre = titres.id and 
+               comptesutilisateurs.login = ? order by titres.nom');
+            $reponse->execute(array($_SESSION['login']));
+						?>
 
-// On récupère tout le contenu de la table jeux_video
-$reponse = $bdd->query('SELECT * FROM genres');
-?>
+						<div class="row">
 
-<div id="liste1" class="row">
+						<?php
+						// On affiche chaque entrée une à une
+						while ($donnees = $reponse->fetch())
+						{
+						?>
+						  <div class="col-xs-6 col-md-3" style="color:#000000" >
+						    
+						          <div  >
+						          	 <?php echo $donnees['nom']; ?> <br/>
+                        <small ><i>by <?php echo $donnees['anom']; ?></i></small>
+						             
+                         <img src="<?php echo $donnees['cover']; ?>" class="thumbnail img-responsive" width="170" height="170">		
+						          </div>
+					          
+						  </div>
 
-<?php
-// On affiche chaque entrée une à une
-while ($donnees = $reponse->fetch())
-{
-?>
-  <div class="col-lg-4 col-sm-6 col-xs-12" style="color:#000000">
-    <strong> <?php echo $donnees['nom']; ?> </strong>
-          <a href="#" onclick="return afficherGenre(<?php echo $donnees['id']; ?>);">
-               <img src="./image/genres/<?php echo $donnees['nom']; ?>.jpg" width="300" height="300" class="thumbnail img-responsive">
-          </a>
-  </div>
+						   
+						<?php
+						}
 
-   
-<?php
-}
+						$reponse->closeCursor(); // Termine le traitement de la requête
+              }
+						?>
+					</div>
+ 
 
-$reponse->closeCursor(); // Termine le traitement de la requête
-
-?>
-</div>
-              <div  class="row">
-                <div class="col-lg-12">
-                  <div id="liste2" class="row"></div>
                 </div>
-              </div>
-      </div>
-  </div>
+            </div>
 
 
 
@@ -186,8 +199,25 @@ $reponse->closeCursor(); // Termine le traitement de la requête
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
 }
-  function ajouterDansPlaylist(id){
-    // Détection du support
+
+function validate(){
+  $("#result").text("");
+  var email = $("#email").val();
+  if (validateEmail(email)) {
+    return true;
+  } else {
+    $("#msg").html("<div class='alert alert-danger' role='alert'>"
+        +"<span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>"
+        +"<span class='sr-only'>Error:</span>"
+        +"&nbsp;Votre adresse n'est pas valide !"
+        +"</div>");
+    return false;
+  }
+  
+}
+
+	function ajouterDansPlaylist(id){
+		// Détection du support
     <?php 
       if(isset($_SESSION['playlist']) ){
         ?>
@@ -217,7 +247,7 @@ $reponse->closeCursor(); // Termine le traitement de la requête
       <?php
       }
     ?>
-    
+		
   }
 
   function retirerDePlaylist(id){
@@ -252,64 +282,24 @@ $reponse->closeCursor(); // Termine le traitement de la requête
     ?>
   }
 
+	function ajouteElement() 
+	{  
+		var email = $("#email").val();
 
+		var mon_div = null;
+		var nouveauDiv = null;
+		  // crée un nouvel élément div
+		  // et lui donne un peu de contenu
+		  nouveauDiv = document.createElement("div");
+		  nouveauDiv.innerHTML = email;
+		    nouveauDiv.style.color="black";
+		  // ajoute l'élément qui vient d'être créé et son contenu au DOM
+		  mon_div = document.getElementById("org_div1");
+		  if (validateEmail(email))
+		    {mon_div.parentNode.insertBefore(nouveauDiv,mon_div);}
+	}
+    </script>
 
-function afficherGenre(genreId){
-
-  //$("#liste1").hide();
-  $.ajax({
-        type:       "POST",
-        cache:      false,
-        url:        "./gestionGenres.php",
-        data:       "genre="+genreId,
-        dataType : 'html', // On désire recevoir du HTML
-        success : function(code_html, statut){ // code_html contient le HTML renvoyé
-           $("#liste1").html(code_html);
-           //alert(code_html);
-       }
-    }); 
-}
-
-function validate(){
-  $("#result").text("");
-  var email = $("#email").val();
-  if (validateEmail(email)) {
-    return true;
-  } else {
-    $("#msg").html("<div class='alert alert-danger' role='alert'>"
-        +"<span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>"
-        +"<span class='sr-only'>Error:</span>"
-        +"&nbsp;Votre adresse n'est pas valide !"
-        +"</div>");
-    return false;
-  }
-  
-}
-
-//$("form").bind("submit", validate);
-</script>
-    
-    
-  
-
-<script type="text/javascript">
-  function ajouteElement() 
-  {  
-    var email = $("#email").val();
-
-    var mon_div = null;
-    var nouveauDiv = null;
-    // crée un nouvel élément div
-    // et lui donne un peu de contenu
-    nouveauDiv = document.createElement("div");
-    nouveauDiv.innerHTML = email;
-      nouveauDiv.style.color="black";
-    // ajoute l'élément qui vient d'être créé et son contenu au DOM
-    mon_div = document.getElementById("org_div1");
-    if (validateEmail(email))
-      {mon_div.parentNode.insertBefore(nouveauDiv,mon_div);}
-  }
-</script>
 
 
 

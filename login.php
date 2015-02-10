@@ -22,7 +22,7 @@ $req->execute(array($_POST['login'],$_POST['pwd']));
 
   $compteur = 0;
   while ($donnees = $req->fetch()){
-    $compteur ++;
+    $compteur ++; 
         
       // dans ce cas, tout est ok, on peut démarrer notre session
 
