@@ -54,10 +54,9 @@ catch (Exception $e)
                     
                     <li class="selected"><a href="accueil.php"><i class="fa fa-bullseye"></i> Accueil</a></li>
                     <li><a href="./genres.php"><i class="fa fa-tasks"></i> Genres</a></li>
-                    <li><a href="#"><i class="fa fa-globe"></i> News</a></li>                  
+                    <li><a href="./news.php"><i class="fa fa-globe"></i> News</a></li>                  
                     <li><a href="./artistes.php"><i class="fa fa-list-ul"></i> Artistes</a></li>
                     <li><a href="./historique.php"><i class="fa fa-list-ol"></i>Historique</a></li>
-                    <li><a href="#"><i class="fa fa-table"></i> Agenda</a></li>
                     <li>
                       <a id ="playlist_link" href="./playlist.php">
                       <i class="fa fa-list"></i> Playlist 
