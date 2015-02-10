@@ -1,4 +1,14 @@
 <!DOCTYPE html>
+<?php
+try
+{
+    $bdd = new PDO('mysql:host=localhost;dbname=test;charset=utf8', 'root', '');
+}
+catch (Exception $e)
+{
+        die('Erreur : ' . $e->getMessage());
+}
+?>
 <html lang="en">
 
     <head>
@@ -17,13 +27,13 @@
 
     <body>
 
-        <div class="page-container">
+        <div id="page-container" style="display:block;" >
             
             <form class="contact-us" action="" method="post">
-                <input type="text" name="name" class="name" placeholder="Email...">
-                <input type="text" name="email" class="email" placeholder="Password...">
+                <input type="text" name="nom" class="name" placeholder="Email...">
+                <input type="text" name="email" class="email" placeholder="Mot de passe...">
                
-                <button type="submit">Send Message</button>
+                <button type="submit">Connextion</button>
             </form>
         </div>
 
@@ -32,6 +42,59 @@
         <script src="assets/js/jquery.backstretch.min.js"></script>
         <script src="assets/js/scripts.js"></script>
 
+        <div class="switch-button">
+           
+        </div>
+
+
+
+
+        <div id="inscription" style="display:none;" >
+            
+            <form class="inscri" action="" method="post">
+                <input type="text" name="Nom" class="name" placeholder="Nom...">
+                <input type="text" name="email" class="email" placeholder="Prenom...">
+                <input type="text" name="email" class="email" placeholder="E-Mail...">
+                <input type="password" name="email" class="email" placeholder="Password...">
+                <input type="password" name="email" class="email" placeholder="Confirme Password...">
+
+
+
+               
+                <button type="submit">S'inscrire</button>
+            </form>
+        </div>
+
+        <!-- Javascript -->
+        <script src="assets/js/jquery-1.10.2.min.js"></script>
+        <script src="assets/js/jquery.backstretch.min.js"></script>
+        <script src="assets/js/scripts.js"></script>
+
+        <div class="switch-button">
+           
+        </div>
+
+
+    
+<script type="text/javascript">
+$(document).ready(function(){
+    var i=true;
+   $('.switch-button').click(function(){
+     $(this).toggleClass("switchOn");
+     if(i==true)
+        {             document.getElementById('page-container').style.display = 'none';
+                      document.getElementById('inscription').style.display = 'block';
+                        i=false;}
+    else {           document.getElementById('page-container').style.display = 'block';
+                     document.getElementById('inscription').style.display = 'none';
+
+                        i=true}
+    
+     console.log(i);
+
+   });
+});
+</script>
     </body>
 
 </html>
