@@ -1,24 +1,13 @@
 <!DOCTYPE html>
 
-
-<?php
-function connectMaBase(){
-    $base = mysqli_connect ('localhost', 'root', 'root','zikon');  
-    
-}
-
-?>
-
 <?php
 
 if(isset($_POST['login']) && isset($_POST['pass'])) 
 {
-                connectMaBase();
-
-
-                                $login = mysql_real_escape_string($_POST['login']);
-                                $password = mysql_real_escape_string($_POST['pass']);
-$reponse = mysql_query("SELECT * FROM comptesutilisateurs WHERE login = 'aazz' AND password = 'aazz'") or die('Ca marche pas'); 
+                $base = mysqli_connect ('localhost', 'root', 'root','zikon');  
+                                $login = mysqli_real_escape_string($base,$_POST['login']);
+                                $password = mysqli_real_escape_string($base,$_POST['pass']);
+$reponse = mysqli_query("SELECT * FROM comptesutilisateurs WHERE login = 'aazz' AND password = 'aazz'") or die('Ca marche pas'); 
 
 if (mmysql_num_rows($reponse) < 1)   
 { 
@@ -33,15 +22,15 @@ else
 
 
  if (isset ($_POST['nom'])){
-                connectMaBase();
+                $base = mysqli_connect ('localhost', 'root', 'root','zikon');  
 
-                              $nom = mysql_real_escape_string($_POST['nom']);
-                                $email=mysql_real_escape_string($_POST['email']);
-                                $pass = mysql_real_escape_string($_POST['pass']);
+                              $nom = mysqli_real_escape_string($base,$_POST['nom']);
+                                $email=mysqli_real_escape_string($base,$_POST['email']);
+                                $pass = mysqli_real_escape_string($base,$_POST['pass']);
                    
                  $sql=('INSERT INTO comptesutilisateurs(nom, login, password) VALUES ("'.$nom.'", "'.$email.'","'.$pass.'");');
 
-                              mysql_query ($sql) or die ('Erreur SQL !'.$sql.'<br />'.mysql_error()); 
+                              mysqli_query ($base,$sql) or die ('Erreur SQL !'.$sql.'<br />'.mysqli_error($base)); 
                           }
 
 
