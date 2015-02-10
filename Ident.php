@@ -53,16 +53,24 @@ else
         <link rel="stylesheet" href="assets/css/reset.css">
         <link rel="stylesheet" href="assets/css/style.css">
 
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
+
+
+    <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+
+
     </head>
 
     <body>
 
         <div id="iden" style="display:block;" >
             
-            <form class="inscri" action="login2.php" method="post">
-                <input type="text" name="login" class="name" placeholder="Email...">
-                <input type="text" name="pass" class="email" placeholder="Mot de passe...">
+            <form class="inscri" action="login2.php" method="post" onsubmit="return validate()">
+                <input id="email" type="text" name="login" class="name" placeholder="Email...">
+                <input type="password" name="pass" class="email" placeholder="Mot de passe...">
                 <button type="submit">Connextion</button>
+                 
             </form>
         </div>
 
@@ -91,8 +99,11 @@ else
 
                
                 <button type="submit">S'inscrire</button>
+            
             </form>
+
         </div>
+       <div id="msg"></div>
 
         <!-- Javascript -->
         <script src="assets/js/jquery-1.10.2.min.js"></script>
@@ -123,6 +134,24 @@ $(document).ready(function(){
 
    });
 });
+function validateEmail(email) {   
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
+function validate(){
+  var email = $("#email").val();
+  if (validateEmail(email)) {
+    return true;
+  } else {
+    $("#msg").html("<div class='alert alert-danger' role='alert'>"
+        +"<span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>"
+        +"<span class='sr-only'>Error:</span>"
+        +"&nbsp;Votre adresse n'est pas valide !"
+        +"</div>");
+    return false;
+  }
+  
+}
 </script>
     </body>
 

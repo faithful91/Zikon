@@ -34,7 +34,7 @@ $req->execute(array($_POST['login'],$_POST['pass']));
       $_SESSION['nom'] = $donnees['nom'];
       $_SESSION['playlist']= [];
       // on redirige notre visiteur vers une page de notre section membre
-      header ("Location: index.php" );
+      header ("Location: accueil.php" );
 }
 if($compteur == 0){
   // Le visiteur n'a pas été reconnu comme étant membre de notre site. On utilise alors un petit javascript lui signalant ce fait
